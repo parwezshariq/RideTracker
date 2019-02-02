@@ -6,4 +6,7 @@ CREATE TABLE `ride_tracker`.`ride` (
   `duration` INT NOT NULL,
   PRIMARY KEY (`id`));
   
+ALTER TABLE `ride_tracker`.`ride` 
+CHANGE COLUMN `id` `id` INT(11) NOT NULL AUTO_INCREMENT ;
+  
   

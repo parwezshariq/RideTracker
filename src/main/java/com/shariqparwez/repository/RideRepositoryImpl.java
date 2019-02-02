@@ -27,6 +27,9 @@ public class RideRepositoryImpl implements RideRepository {
 
 	@Override
 	public Ride createRide(Ride ride) {
+		JdbcTemplate.update("insert into ride (name, duration) values (?,?)", 
+				ride.getName(), ride.getDuration());
+		
 		return null;
 	}
 	
