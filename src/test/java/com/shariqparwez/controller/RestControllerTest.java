@@ -41,4 +41,16 @@ public class RestControllerTest {
 		
 		restTemplate.put("http://localhost:8080/ride_tracker/ride", ride);
 	}
+	
+	/*@Test(timeout=5000)
+	public void testCreateRideWithSimpleJDBCInsert() {
+		RestTemplate restTemplate = new RestTemplate();
+		
+		Ride ride = new Ride();
+		
+		ride.setName("Round Valley Ride");
+		ride.setDuration(38);
+		
+		restTemplate.put("http://localhost:8080/ride_tracker/ride", ride);
+	}*/
 }

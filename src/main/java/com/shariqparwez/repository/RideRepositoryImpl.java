@@ -1,10 +1,13 @@
 package com.shariqparwez.repository;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
 import com.shariqparwez.model.Ride;
@@ -32,5 +35,27 @@ public class RideRepositoryImpl implements RideRepository {
 		
 		return null;
 	}
+	
+	/*@Override
+	public Ride createRide(Ride ride) {
+		//Using SimpleJdbcInsert
+		SimpleJdbcInsert insert = new SimpleJdbcInsert(JdbcTemplate);
+		List<String> columns = new ArrayList<>();
+		columns.add("name");
+		columns.add("duration");
+		insert.setTableName("ride");
+		insert.setColumnNames(columns);
+		
+		Map<String, Object> data = new HashMap<>();
+		data.put("name", ride.getName());
+		data.put("duration", ride.getDuration());		
+		
+		insert.setGeneratedKeyName("id");
+		Number key = insert.executeAndReturnKey(data);
+		
+		System.out.println(key);
+		
+		return null;
+	}*/
 	
 }
