@@ -25,21 +25,21 @@ import com.shariqparwez.repository.util.RideRowMapper;
 public class RideRepositoryImpl implements RideRepository {
 
 	@Autowired
-	private JdbcTemplate JdbcTemplate;
+	private JdbcTemplate jdbcTemplate;
 	
 	@Override
 	public List<Ride> getRides() {
-		List <Ride> rides = JdbcTemplate.query("select * from ride", new RideRowMapper());
+		List <Ride> rides = jdbcTemplate.query("select * from ride", new RideRowMapper());
 		return rides;
 	}
 
 /*	@Override
 	public Ride createRide(Ride ride) {
-		//JdbcTemplate.update("insert into ride (name, duration) values (?,?)", 
+		//jdbcTemplate.update("insert into ride (name, duration) values (?,?)", 
 		//		ride.getName(), ride.getDuration());
 		
 		KeyHolder keyHolder = new GeneratedKeyHolder();
-		JdbcTemplate.update(new PreparedStatementCreator() {
+		jdbcTemplate.update(new PreparedStatementCreator() {
 			
 			@Override
 			public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
@@ -57,14 +57,14 @@ public class RideRepositoryImpl implements RideRepository {
 
 	@Override
 	public Ride getRide(int id) {
-		Ride ride = JdbcTemplate.queryForObject("select * from ride where id = ?", new RideRowMapper(), id);
+		Ride ride = jdbcTemplate.queryForObject("select * from ride where id = ?", new RideRowMapper(), id);
 		
 		return ride;
 	}
 	
 	/*@Override
 	public Ride createRide(Ride ride) {
-		JdbcTemplate.update("insert into ride (name, duration) values (?,?)", 
+		jdbcTemplate.update("insert into ride (name, duration) values (?,?)", 
 				ride.getName(), ride.getDuration());
 		
 		return null;
@@ -73,7 +73,7 @@ public class RideRepositoryImpl implements RideRepository {
 	@Override
 	public Ride createRide(Ride ride) {
 		//Using SimpleJdbcInsert
-		SimpleJdbcInsert insert = new SimpleJdbcInsert(JdbcTemplate);
+		SimpleJdbcInsert insert = new SimpleJdbcInsert(jdbcTemplate);
 		List<String> columns = new ArrayList<>();
 		columns.add("name");
 		columns.add("duration");
@@ -88,6 +88,14 @@ public class RideRepositoryImpl implements RideRepository {
 		Number key = insert.executeAndReturnKey(data);
 				
 		return getRide(key.intValue());
+	}
+
+	@Override
+	public Ride updateRide(Ride ride) {
+		jdbcTemplate.update("update ride set name = ?, duration = ? where id = ?",
+				ride.getName(), ride.getDuration(), ride.getId());
+		
+		return ride;
 	}
 	
 }
