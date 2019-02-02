@@ -39,8 +39,11 @@ public class RestControllerTest {
 		//ride.setName("Willow Trail Ride");
 		//ride.setDuration(30);
 		
-		ride.setName("Sagebrush Trail");
-		ride.setDuration(33);
+		//ride.setName("Sagebrush Trail");
+		//ride.setDuration(33);
+		
+		ride.setName("Yellow Fork Trail");
+		ride.setDuration(36);
 		
 		//restTemplate.put("http://localhost:8080/ride_tracker/ride", ride);
 		restTemplate.postForObject("http://localhost:8080/ride_tracker/ride", ride, Ride.class);

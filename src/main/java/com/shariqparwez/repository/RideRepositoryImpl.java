@@ -33,7 +33,7 @@ public class RideRepositoryImpl implements RideRepository {
 		return rides;
 	}
 
-	@Override
+/*	@Override
 	public Ride createRide(Ride ride) {
 		//JdbcTemplate.update("insert into ride (name, duration) values (?,?)", 
 		//		ride.getName(), ride.getDuration());
@@ -53,7 +53,7 @@ public class RideRepositoryImpl implements RideRepository {
 		Number id = keyHolder.getKey();
 		return getRide(id.intValue());
 		
-	}
+	}*/
 
 	private Ride getRide(int id) {
 		Ride ride = JdbcTemplate.queryForObject("select * from ride where id = ?", new RideRowMapper(), id);
@@ -69,7 +69,7 @@ public class RideRepositoryImpl implements RideRepository {
 		return null;
 	}*/
 	
-	/*@Override
+	@Override
 	public Ride createRide(Ride ride) {
 		//Using SimpleJdbcInsert
 		SimpleJdbcInsert insert = new SimpleJdbcInsert(JdbcTemplate);
@@ -85,10 +85,8 @@ public class RideRepositoryImpl implements RideRepository {
 		
 		insert.setGeneratedKeyName("id");
 		Number key = insert.executeAndReturnKey(data);
-		
-		System.out.println(key);
-		
-		return null;
-	}*/
+				
+		return getRide(key.intValue());
+	}
 	
 }
