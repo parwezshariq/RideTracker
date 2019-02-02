@@ -13,7 +13,7 @@ import org.junit.Test;
 
 public class RestControllerTest {
 
-	@Test(timeout=5000)
+	@Test(timeout=10000)
 	public void testGetRides() {
 		RestTemplate restTemplate = new RestTemplate();
 
@@ -63,4 +63,14 @@ public class RestControllerTest {
 		
 		restTemplate.put("http://localhost:8080/ride_tracker/ride", ride);
 	}*/
+	
+	@Test(timeout=10000)
+	public void testGetRide() {
+		RestTemplate restTemplate = new RestTemplate();
+		
+		Ride ride = restTemplate.getForObject("http://localhost:8080/ride_tracker/ride/1", Ride.class);
+	
+		System.out.println("Ride name: " + ride.getName());
+		
+	}
 }

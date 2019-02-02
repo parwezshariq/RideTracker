@@ -55,7 +55,8 @@ public class RideRepositoryImpl implements RideRepository {
 		
 	}*/
 
-	private Ride getRide(int id) {
+	@Override
+	public Ride getRide(int id) {
 		Ride ride = JdbcTemplate.queryForObject("select * from ride where id = ?", new RideRowMapper(), id);
 		
 		return ride;
