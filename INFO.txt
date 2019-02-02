@@ -8,5 +8,9 @@ CREATE TABLE `ride_tracker`.`ride` (
   
 ALTER TABLE `ride_tracker`.`ride` 
 CHANGE COLUMN `id` `id` INT(11) NOT NULL AUTO_INCREMENT ;
-  
+
+BEFOR BATCH UPDATE
+
+ALTER TABLE ride ADD ride_date DATETIME AFTER duration;
+ 
   
