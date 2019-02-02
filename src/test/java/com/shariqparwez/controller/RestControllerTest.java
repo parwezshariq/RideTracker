@@ -28,7 +28,7 @@ public class RestControllerTest {
 		}
 	}
 	
-	@Test(timeout=5000)
+	@Test(timeout=10000)
 	public void testCreateRide() {
 		RestTemplate restTemplate = new RestTemplate();
 		
@@ -36,8 +36,11 @@ public class RestControllerTest {
 		//ride.setName("Bobsled Trail Ride");
 		//ride.setDuration(35);
 		
-		ride.setName("Willow Trail Ride");
-		ride.setDuration(30);
+		//ride.setName("Willow Trail Ride");
+		//ride.setDuration(30);
+		
+		ride.setName("Sagebrush Trail");
+		ride.setDuration(33);
 		
 		//restTemplate.put("http://localhost:8080/ride_tracker/ride", ride);
 		restTemplate.postForObject("http://localhost:8080/ride_tracker/ride", ride, Ride.class);

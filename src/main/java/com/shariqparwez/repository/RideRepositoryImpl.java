@@ -1,5 +1,7 @@
 package com.shariqparwez.repository;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -9,8 +11,11 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import com.shariqparwez.model.Ride;
@@ -30,11 +35,39 @@ public class RideRepositoryImpl implements RideRepository {
 
 	@Override
 	public Ride createRide(Ride ride) {
+		//JdbcTemplate.update("insert into ride (name, duration) values (?,?)", 
+		//		ride.getName(), ride.getDuration());
+		
+		KeyHolder keyHolder = new GeneratedKeyHolder();
+		JdbcTemplate.update(new PreparedStatementCreator() {
+			
+			@Override
+			public PreparedStatement createPreparedStatement(Connection con) throws SQLException {
+				PreparedStatement ps = con.prepareStatement("insert into ride (name, duration) values (?,?)", new String[] {"id"});
+				ps.setString(1, ride.getName());
+				ps.setInt(2, ride.getDuration());
+				return ps;
+			}
+		}, keyHolder);
+		
+		Number id = keyHolder.getKey();
+		return getRide(id.intValue());
+		
+	}
+
+	private Ride getRide(int id) {
+		Ride ride = JdbcTemplate.queryForObject("select * from ride where id = ?", new RideRowMapper(), id);
+		
+		return ride;
+	}
+	
+	/*@Override
+	public Ride createRide(Ride ride) {
 		JdbcTemplate.update("insert into ride (name, duration) values (?,?)", 
 				ride.getName(), ride.getDuration());
 		
 		return null;
-	}
+	}*/
 	
 	/*@Override
 	public Ride createRide(Ride ride) {
