@@ -86,7 +86,7 @@ public class RestControllerTest {
 		
 	}
 	
-	@Test(timeout=10000)
+	@Test(timeout=20000)
 	public void testBatchUpdate() {
 		RestTemplate restTemplate = new RestTemplate();
 		
